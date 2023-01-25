@@ -1,19 +1,20 @@
 trigger: none
 
 schedules:
-- cron: "0 8 * * Mon-Fri" # First number represent the amount of minutes, second represent the hours. In this case 08:00 Monday - Friday
+- cron: "0 7 * * Mon-Fri" # First number represent the amount of minutes, second represent the hours. In this case 07:00 Monday - Friday
   displayName: Stop Self Hosted Agent Container
   branches:
     include: 
     - master
   always: true
 
-pool: "Hosted VS2017"
+pool:
+  vmImage: 'windows-latest'
 
 variables:
-  ResourceGroupName: 'rg-tyrell-app-001'
-  ACIname: 'aci-tyrell-app-001'
-  ServiceConnection: 'Tyrell-MSDN'
+  ResourceGroupName: 'rg-networking'
+  ACIname: 'polarisbuildagent'
+  ServiceConnection: 'Innovation-Development: All-Information Management'
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
