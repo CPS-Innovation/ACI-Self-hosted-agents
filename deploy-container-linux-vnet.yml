@@ -8,15 +8,15 @@ pool:
 # Only change and fill in the parameters below:
 variables:
   # URL to your Azure DevOps Organization and name of the agent pool. You'll need to create the agent pool yourself first.
-  azdUrl: 'https://dev.azure.com/enecomanagedcloud/'
-  agentPool: 'ACI-Linux'
+  azdUrl: 'https://dev.azure.com/CPSDTS/'
+  agentPool: 'ACI-Linux-VNet'
   # Name of Key Vault where secrets are stored for the Azure Container Registry credentials and its proper URL.
-  ServiceConnection: 'Tyrell-MSDN'
-  ResourceGroup: 'rg-tyrell-app-001'
-  keyVaultName: 'kv-tyrell-app-001'
+  ServiceConnection: 'Innovation-Development: All-Information Management'
+  ResourceGroup: 'rg-networking'
+  keyVaultName: 'kv-polaris-containers'
   # Name of the Azure Container Registry deployed in the previous pipeline.
-  containerInstanceName: 'aci-tyrell-app-001'
-  acrName: 'acrtyrellapp001'
+  containerInstanceName: 'polarisbuildagent'
+  acrName: 'polariscontainersdev'
   containerRepository: 'adsha-ubuntulinux' # changing this is optional
 
   # Provide the name of your vNet and subnet to which the Azure Container Instance and thus the container agent should be linked.
@@ -24,8 +24,8 @@ variables:
   # deploying container groups to it, or create a new subnet. 
   # For additional details als limitations please see https://docs.microsoft.com/nl-nl/azure/container-instances/container-instances-vnet
   
-  vnetName: ''
-  subnetName: ''
+  vnetName: 'vnet-innovation-development'
+  subnetName: 'polaris-ci-subnet'
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
