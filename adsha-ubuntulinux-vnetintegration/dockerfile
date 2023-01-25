@@ -24,15 +24,36 @@ RUN Install-Module Az -Force -Scope AllUsers ; `
     Install-Module PSScriptAnalyzer -Force -Scope AllUsers
 
 # Install .NET Core SDK
-RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -OutFile ./packages-microsoft-prod.deb -UseBasicParsing ; `
+RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -OutFile ./packages-microsoft-prod.deb -UseBasicParsing ; `
     dpkg -i ./packages-microsoft-prod.deb ; `
     rm ./packages-microsoft-prod.deb
 
 # Install some other packages
 RUN apt install git -y ; `
+	apt install powershell -y ; `
     apt-get install apt-transport-https -y ; `
     apt-get update ; `
-    apt-get install dotnet-sdk-2.2 -y ; `
-    apt-get install zip -y
+    apt-get install dotnet-sdk-6.0 -y ; `
+    apt-get install zip -y ; `
+	apt-get ca-certificates -y ; `
+	apt-get curl -y ; `
+	apt-get jq -y ; `
+	apt-get iputils-ping -y ; `
+	apt-get libcurl4 -y ; `
+	apt-get libicu60 -y ; `
+	apt-get libunwind8 -y ; `
+	apt-get netcat -y ; `
+	apt-get libssl1.0 -y ; `
+	apt-get maven -y ; `
+	apt-get time -y ; `
+	apt-get unzip -y ; `
+	apt-get wget -y ; `
+	apt-get tzdata -y ; `
+	apt-get apt-utils -y ; `
+	apt-get xvfb -y ; `
+	apt-get sudo -y ; `
+	apt-get nodejs -y ; `
+	apt-get gnupg-agent -y ; `
+	apt-get software-propertis-common -y
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
