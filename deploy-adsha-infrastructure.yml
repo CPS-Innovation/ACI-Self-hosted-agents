@@ -6,7 +6,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  ResourceGroup: 'rg-polaris-containers'
+  ResourceGroup: 'rg-networking'
   ServiceConnection: 'Innovation-Development: All-Information Management'
   KeyVaultName: 'kv-polaris-containers'
   acrName: 'polariscontainersdev' # may contain alpha numeric characters only and must be between 5 and 50 characters
