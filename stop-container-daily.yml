@@ -8,7 +8,8 @@ schedules:
     - master
   always: true
 
-pool: 'Hosted VS2017'
+pool:
+  vmImage: 'windows-latest'
 
 variables:
   ResourceGroupName: 'rg-networking'
