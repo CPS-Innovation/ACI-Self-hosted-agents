@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/powershell:6.2.0-ubuntu-18.04
+FROM mcr.microsoft.com/powershell:7.3-ubuntu-22.04
 
 # Set default directory to C:\Agent
 WORKDIR /agent
@@ -30,8 +30,7 @@ RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/22.04/pa
 
 # Install some other packages
 RUN apt install git -y ; `
-	apt install powershell -y ; `
-    apt-get install apt-transport-https -y ; `
+	apt-get install apt-transport-https -y ; `
     apt-get update ; `
     apt-get install dotnet-sdk-6.0 -y ; `
     apt-get install zip -y ; `
