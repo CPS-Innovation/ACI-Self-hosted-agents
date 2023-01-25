@@ -1,9 +1,5 @@
 trigger: none
 
-# We need to rely on a hosted agent from Microsoft.
-# And specifically a Windows agent because we'll be relying on passing on environment variables to Powershell.
-pool: 'Hosted VS2017'
-
 variables:
   ResourceGroup: 'rg-polaris-containers'
   ServiceConnection: 'Innovation-Development: All-Information Management'
