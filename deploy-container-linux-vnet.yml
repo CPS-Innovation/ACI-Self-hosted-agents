@@ -50,9 +50,9 @@ steps:
     targetType: 'inline'
     script: |
       docker login $(acrName).azurecr.io --username $(acrName) --password $(RegistryPassword1) 
-      docker build $(containerRepository) -t $(registryUri)/$(containerRepository):$(Build.BuildId)
+      docker build $(containerRepository) -t $(registryUri)/$(containerRepository):latest
       docker images
-      docker push $(registryUri)/$(containerRepository):$(Build.BuildId)
+      docker push $(registryUri)/$(containerRepository):latest
 
 # Lastly the Azure Container Instance will be deployed. All parameters are overriden except one!
 # Since we don't want to insert and pass on the Azure Key Vault secrets in this task, you need to modify 

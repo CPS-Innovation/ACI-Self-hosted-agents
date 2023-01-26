@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/powershell:7.3-ubuntu-22.04
+FROM mcr.microsoft.com/powershell:7.1.2-ubuntu-20.04
 
 # Set default directory to C:\Agent
 WORKDIR /agent
@@ -9,50 +9,40 @@ WORKDIR /agent
 SHELL [ "pwsh", "-NoProfile", "-Command" ]
 
 # Install VSTS/DevOps self-hosted Agent
-ARG agentversion=2.155.1
+ARG agentversion=2.214.1
 ENV agentversion=${agentversion}
 ENV AGENT_ALLOW_RUNASROOT 1
 RUN $ProgressPreference = 'SilentlyContinue' ; `
     Invoke-WebRequest -Uri "https://vstsagentpackage.azureedge.net/agent/$env:agentversion/vsts-agent-linux-x64-$env:agentversion.tar.gz" -OutFile "./vsts-agent-linux-x64-$env:agentversion.tar.gz" -UseBasicParsing ; `
     tar  zxvf "./vsts-agent-linux-x64-$env:agentversion.tar.gz" ; `
     rm "./vsts-agent-linux-x64-$env:agentversion.tar.gz" ; `
-    ./bin/installdependencies.sh
+    ./bin/installdependencies.sh 
+
+# Download the Microsoft repository GPG keys
+RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -OutFile ./packages-microsoft-prod.deb -UseBasicParsing ; `
+  # Register the Microsoft repository GPG keys
+  dpkg -i ./packages-microsoft-prod.deb ; `
+  rm ./packages-microsoft-prod.deb
 
 # Install PS Modules in C:\Modules
 RUN Install-Module Az -Force -Scope AllUsers ; `
     Install-Module Pester -Force -Scope AllUsers ; `
     Install-Module PSScriptAnalyzer -Force -Scope AllUsers
 
-# Install .NET Core SDK
-RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -OutFile ./packages-microsoft-prod.deb -UseBasicParsing ; `
-    dpkg -i ./packages-microsoft-prod.deb ; `
-    rm ./packages-microsoft-prod.deb
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash ; `
+    rm -rf /var/lib/apt/lists/*
 
-# Install some other packages
 RUN apt install git -y ; `
-	apt-get install apt-transport-https -y ; `
+    apt-get install apt-transport-https -y ; `
     apt-get update ; `
-    apt-get install dotnet-sdk-6.0 -y ; `
-    apt-get install zip -y ; `
-	apt-get ca-certificates -y ; `
-	apt-get curl -y ; `
-	apt-get jq -y ; `
-	apt-get iputils-ping -y ; `
-	apt-get libcurl4 -y ; `
-	apt-get libicu60 -y ; `
-	apt-get libunwind8 -y ; `
-	apt-get netcat -y ; `
-	apt-get libssl1.0 -y ; `
-	apt-get maven -y ; `
-	apt-get time -y ; `
-	apt-get unzip -y ; `
-	apt-get wget -y ; `
-	apt-get tzdata -y ; `
-	apt-get apt-utils -y ; `
-	apt-get xvfb -y ; `
-	apt-get sudo -y ; `
-	apt-get nodejs -y ; `
-	apt-get gnupg-agent -y ; `
-	apt-get software-propertis-common -y
+    apt-get install apt-utils ; `
+    apt-get install ca-certificates ; `
+    apt-get install curl ; `
+    apt-get install iputils-ping ; `
+    apt-get install jq ; `
+    apt-get install lsb-release ; `
+    apt-get install software-properties-common ; `
+    apt-get install zip ; `
+    apt-get install unzip
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
