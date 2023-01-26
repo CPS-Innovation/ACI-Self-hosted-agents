@@ -33,9 +33,6 @@ RUN Install-Module Az -Force -Scope AllUsers ; `
 RUN apt remove azure-cli -y ; `
     apt autoremove -y
 
-RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash ; `
-    rm -rf /var/lib/apt/lists/*
-
 RUN apt update -y ; `
     apt-get install apt-utils -y ; `
     apt-get install apt-transport-https -y ; `
@@ -49,5 +46,7 @@ RUN apt update -y ; `
     apt-get install zip -y ; `
     apt-get install unzip -y 
 
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash ; `
+    rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
