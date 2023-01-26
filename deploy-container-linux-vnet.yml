@@ -17,7 +17,7 @@ variables:
   # Name of the Azure Container Registry deployed in the previous pipeline.
   containerInstanceName: 'polarisbuildagent'
   acrName: 'polariscontainersdev'
-  containerRepository: 'adsha-ubuntulinux' # changing this is optional
+  containerRepository: 'polariscontainersrepo' # changing this is optional
 
   # Provide the name of your vNet and subnet to which the Azure Container Instance and thus the container agent should be linked.
   # The subnet cannot contain any other resource types. Remove all existing resources from an existing subnet prior to 
@@ -67,6 +67,6 @@ steps:
     templateLocation: 'Linked artifact'
     csmFile: 'adsha-ubuntulinux-vnetintegration/ACI_DevOps_Agent_VNet_template.json'
     csmParametersFile: 'adsha-ubuntulinux-vnetintegration/ACI_DevOps_Agent_VNet_parameters.json'
-    overrideParameters: '-containerInstanceName $(containerInstanceName) -azdUrl $(azdUrl) -patToken $(patTokenManageAgent) -agentPool $(agentPool) -registryLoginServer $(registryUri) -registryImageUri $(registryUri)/$(containerRepository):$(Build.BuildId) -registryUserName $(acrName) -registryPassword $(RegistryPassword1) -vnetName $(vnetName) -subnetName $(subnetName)'
+    overrideParameters: '-containerInstanceName $(containerInstanceName) -azdUrl $(azdUrl) -patToken $(patTokenManageAgent) -agentPool $(agentPool) -registryLoginServer $(registryUri) -registryImageUri $(registryUri)/$(containerRepository):latest -registryUserName $(acrName) -registryPassword $(RegistryPassword1) -vnetName $(vnetName) -subnetName $(subnetName)'
     deploymentMode: 'Incremental'
 
