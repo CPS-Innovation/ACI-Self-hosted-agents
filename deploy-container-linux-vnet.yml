@@ -3,7 +3,7 @@ trigger: none
 # We need to rely on a hosted agent from Microsoft to build and deploy our container agent for the first time.
 # Please note that we'll be needing a Windows/Linux agent to match the corrosponding container image source. Otherwise the build will fail.
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-20.04'
 
 # Only change and fill in the parameters below:
 variables:
