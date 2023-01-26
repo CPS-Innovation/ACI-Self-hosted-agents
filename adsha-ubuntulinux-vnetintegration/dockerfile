@@ -42,11 +42,6 @@ RUN apt update -y ; `
     apt-get install zip -y ; `
     apt-get install unzip -y 
 
-#remove old version of azure cli
-RUN apt remove azure-cli -y ; `
-    apt autoremove -y \
-    
-RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash ; `
-    rm -rf /var/lib/apt/lists/*
+RUN	curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
