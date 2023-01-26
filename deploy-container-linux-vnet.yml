@@ -51,8 +51,7 @@ steps:
     targetType: 'inline'
     script: |
       docker login $(acrName).azurecr.io --username $(acrName) --password $(RegistryPassword1) 
-      docker build ./ -t $(registryUri)/$(containerRepository):$(imageTag)
-      docker images $(registryUri)/$(containerRepository):$(imageTag)
+      docker build ./adsha-ubuntulinux-vnetintegration/. -t $(registryUri)/$(containerRepository):$(imageTag)
       docker push $(registryUri)/$(containerRepository):$(imageTag)
 
 # Lastly the Azure Container Instance will be deployed. All parameters are overriden except one!
