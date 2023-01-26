@@ -27,7 +27,11 @@ RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/20.04/pa
 # Install PS Modules in C:\Modules
 RUN Install-Module Az -Force -Scope AllUsers ; `
     Install-Module Pester -Force -Scope AllUsers ; `
-    Install-Module PSScriptAnalyzer -Force -Scope AllUsers
+    Install-Module PSScriptAnalyzer -Force -Scope AllUsers 
+
+#remove old version of azure cli
+RUN apt remove azure-cli -y ; `
+    apt autoremove -y
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash ; `
     rm -rf /var/lib/apt/lists/*
@@ -43,6 +47,7 @@ RUN apt update -y ; `
     apt-get install lsb-release -y ; `
     apt-get install software-properties-common -y ; `
     apt-get install zip -y ; `
-    apt-get install unzip -y
+    apt-get install unzip -y 
+
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
