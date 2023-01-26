@@ -32,17 +32,17 @@ RUN Install-Module Az -Force -Scope AllUsers ; `
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash ; `
     rm -rf /var/lib/apt/lists/*
 
-RUN apt install git -y ; `
+RUN apt update -y ; `
+    apt-get install apt-utils -y ; `
     apt-get install apt-transport-https -y ; `
-    apt-get update ; `
-    apt-get install apt-utils ; `
-    apt-get install ca-certificates ; `
-    apt-get install curl ; `
-    apt-get install iputils-ping ; `
-    apt-get install jq ; `
-    apt-get install lsb-release ; `
-    apt-get install software-properties-common ; `
-    apt-get install zip ; `
-    apt-get install unzip
+    apt-get install git -y ; `
+    apt-get install ca-certificates -y ; `
+    apt-get install curl -y ; `
+    apt-get install iputils-ping -y ; `
+    apt-get install jq -y ; `
+    apt-get install lsb-release -y ; `
+    apt-get install software-properties-common -y ; `
+    apt-get install zip -y ; `
+    apt-get install unzip -y
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
