@@ -29,7 +29,7 @@ RUN Install-Module Az -Force -Scope AllUsers ; `
     Install-Module Pester -Force -Scope AllUsers ; `
     Install-Module PSScriptAnalyzer -Force -Scope AllUsers 
 
-RUN apt update -y ; `
+RUN apt-get update -y ; `
     apt-get install apt-utils -y ; `
     apt-get install apt-transport-https -y ; `
     apt-get install git -y ; `
@@ -42,6 +42,16 @@ RUN apt update -y ; `
     apt-get install zip -y ; `
     apt-get install unzip -y 
 
-RUN	curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN	curl -L https://aka.ms/InstallAzureCLIDeb | bash
+
+RUN apt-get update -yq ; `
+    apt-get -yq install curl gnupg ca-certificates ; `
+    curl -L https://deb.nodesource.com/setup_12.x | bash ; `
+    apt-get update -yq ; `
+    apt-get install -yq ; `
+        dh-autoreconf=19 ; `
+        ruby=1:2.5.* ; `
+        ruby-dev=1:2.5.* ; `
+        nodejs
 
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
