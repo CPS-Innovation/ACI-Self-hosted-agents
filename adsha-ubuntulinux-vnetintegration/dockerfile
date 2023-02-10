@@ -30,18 +30,17 @@ RUN Install-Module Az -Force -Scope AllUsers ; `
     Install-Module PSScriptAnalyzer -Force -Scope AllUsers 
 
 RUN apt-get update -yq ; `
-    apt-get install -y ; `
-    apt-utils ; `
-    apt-transport-https ; `
-    git ; `
-    ca-certificates ; `
-    curl ; `
-    iputils-ping ; `
-    jq ; `
-    lsb-release ; `
-    software-properties-common ; `
-    zip ; `
-    unzip ; `
+    apt-get install -y apt-utils ; `
+    apt-get install -y apt-transport-https ; `
+    apt-get install -y git ; `
+    apt-get install -y ca-certificates ; `
+    apt-get install -y curl ; `
+    apt-get install -y iputils-ping ; `
+    apt-get install -y jq ; `
+    apt-get install -y lsb-release ; `
+    apt-get install -y software-properties-common ; `
+    apt-get install -y zip ; `
+    apt-get install -y unzip ; `
     apt-get clean
 
 RUN	curl -L https://aka.ms/InstallAzureCLIDeb | bash
@@ -49,20 +48,19 @@ RUN	curl -L https://aka.ms/InstallAzureCLIDeb | bash
 RUN apt-get update -yq ; `
     apt-get -yq install curl gnupg ca-certificates ; `
     curl -L https://deb.nodesource.com/setup_14.x | bash ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y ; `
-    npm ; `
-    nodejs ; `
-    libgtk2.0-0 ; `
-    libgtk-3-0 ; `
-    libgbm-dev ; `
-    libnotify-dev ; `
-    libgconf-2-4 ; `
-    libnss3 ; `
-    libxss1 ; `
-    libasound2 ; `
-    libxtst6 ; `
-    xauth ; `
-    xvfb ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y npm ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk2.0-0 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk-3-0 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libgbm-dev ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libnotify-dev ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libgconf-2-4 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libnss3 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libxss1 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libasound2 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libxtst6 ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y xauth ; `
+    DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb ; `
     apt-get clean
         
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
