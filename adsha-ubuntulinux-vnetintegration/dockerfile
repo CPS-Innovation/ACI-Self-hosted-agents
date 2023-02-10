@@ -48,19 +48,19 @@ RUN	curl -L https://aka.ms/InstallAzureCLIDeb | bash
 RUN apt-get update -yq ; `
     apt-get -yq install curl gnupg ca-certificates ; `
     curl -L https://deb.nodesource.com/setup_14.x | bash ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y npm ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk2.0-0 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk-3-0 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libgbm-dev ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libnotify-dev ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libgconf-2-4 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libnss3 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libxss1 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libasound2 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libxtst6 ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y xauth ; `
-    DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb ; `
+    apt-get install -y npm ; `
+    apt-get install -y nodejs ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk2.0-0 ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk-3-0 ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgbm-dev ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libnotify-dev ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgconf-2-4 ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libnss3 ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libxss1 ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libasound2 ; `
+    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libxtst6 ; `
+    apt-get install -y xauth ; `
+    apt-get install -y xvfb ; `
     apt-get clean
         
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
