@@ -50,10 +50,10 @@ RUN apt-get update -yq ; `
     curl -L https://deb.nodesource.com/setup_14.x | bash ; `
     apt-get install -y npm ; `
     apt-get install -y nodejs ; `
-    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk2.0-0 ; `
-    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgtk-3-0 ; `
-    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgbm-dev ; `
-    ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libnotify-dev ; `
+    apt-get install -y libgtk2.0-0 ; `
+    apt-get install -y libgtk-3-0 ; `
+    apt-get install -y libgbm-dev ; `
+    apt-get install -y libnotify-dev ; `
     ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libgconf-2-4 ; `
     ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libnss3 ; `
     ARG DEBIAN_FRONTEND=noninteractive apt-get install -y libxss1 ; `
