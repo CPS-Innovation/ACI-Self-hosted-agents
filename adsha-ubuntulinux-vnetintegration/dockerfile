@@ -12,53 +12,54 @@ SHELL [ "pwsh", "-NoProfile", "-Command" ]
 ARG agentversion=2.214.1
 ENV agentversion=${agentversion}
 ENV AGENT_ALLOW_RUNASROOT 1
-RUN $ProgressPreference = 'SilentlyContinue' ; `
-    Invoke-WebRequest -Uri "https://vstsagentpackage.azureedge.net/agent/$env:agentversion/vsts-agent-linux-x64-$env:agentversion.tar.gz" -OutFile "./vsts-agent-linux-x64-$env:agentversion.tar.gz" -UseBasicParsing ; `
-    tar  zxvf "./vsts-agent-linux-x64-$env:agentversion.tar.gz" ; `
-    rm "./vsts-agent-linux-x64-$env:agentversion.tar.gz" ; `
+RUN $ProgressPreference = 'SilentlyContinue' \
+    Invoke-WebRequest -Uri "https://vstsagentpackage.azureedge.net/agent/$env:agentversion/vsts-agent-linux-x64-$env:agentversion.tar.gz" -OutFile "./vsts-agent-linux-x64-$env:agentversion.tar.gz" -UseBasicParsing \
+    tar  zxvf "./vsts-agent-linux-x64-$env:agentversion.tar.gz" \
+    rm "./vsts-agent-linux-x64-$env:agentversion.tar.gz" \
     ./bin/installdependencies.sh 
 
 # Download the Microsoft repository GPG keys
-RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -OutFile ./packages-microsoft-prod.deb -UseBasicParsing ; `
+RUN Invoke-WebRequest -Uri https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -OutFile ./packages-microsoft-prod.deb -UseBasicParsing \
   # Register the Microsoft repository GPG keys
-  dpkg -i ./packages-microsoft-prod.deb ; `
+  dpkg -i ./packages-microsoft-prod.deb \
   rm ./packages-microsoft-prod.deb
 
 # Install PS Modules in C:\Modules
-RUN Install-Module Az -Force -Scope AllUsers ; `
-    Install-Module Pester -Force -Scope AllUsers ; `
+RUN Install-Module Az -Force -Scope AllUsers \
+    Install-Module Pester -Force -Scope AllUsers \
     Install-Module PSScriptAnalyzer -Force -Scope AllUsers 
 
-RUN apt-get update -y ; `
-    apt-get install apt-utils -y ; `
-    apt-get install apt-transport-https -y ; `
-    apt-get install git -y ; `
-    apt-get install ca-certificates -y ; `
-    apt-get install curl -y ; `
-    apt-get install iputils-ping -y ; `
-    apt-get install jq -y ; `
-    apt-get install lsb-release -y ; `
-    apt-get install software-properties-common -y ; `
-    apt-get install zip -y ; `
+RUN apt-get update -y \
+    apt-get install apt-utils -y \
+    apt-get install apt-transport-https -y \
+    apt-get install git -y \
+    apt-get install ca-certificates -y \
+    apt-get install curl -y \
+    apt-get install iputils-ping -y \
+    apt-get install jq -y \
+    apt-get install lsb-release -y \
+    apt-get install software-properties-common -y \
+    apt-get install zip -y \
     apt-get install unzip -y 
 
 RUN	curl -L https://aka.ms/InstallAzureCLIDeb | bash
 
-RUN apt-get update -yq ; `
-    apt-get -yq install curl gnupg ca-certificates ; `
-    curl -L https://deb.nodesource.com/setup_14.x | bash ; `
-    apt-get install npm -y ; `
-    apt-get install nodejs -y ; `
-    apt-get install libgtk2.0-0 -y ; `
-    apt-get install libgtk-3-0 -y ; `
-    apt-get install libgbm-dev -y ; `
-    apt-get install libnotify-dev -y ; `
-    apt-get install libgconf-2-4 -y ; `
-    apt-get install libnss3 -y ; `
-    apt-get install libxss1 -y ; `
-    apt-get install libasound2 -y ; `
-    apt-get install libxtst6 -y ; `
-    apt-get install xauth -y ; `
+RUN apt-get update -yq \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get -yq install curl gnupg ca-certificates \
+    curl -L https://deb.nodesource.com/setup_14.x | bash \
+    apt-get install npm -y \
+    apt-get install nodejs -y \
+    apt-get install libgtk2.0-0 -y \
+    apt-get install libgtk-3-0 -y \
+    apt-get install libgbm-dev -y \
+    apt-get install libnotify-dev -y \
+    apt-get install libgconf-2-4 -y \
+    apt-get install libnss3 -y \
+    apt-get install libxss1 -y \
+    apt-get install libasound2 -y \
+    apt-get install libxtst6 -y \
+    apt-get install xauth -y \
     apt-get install xvfb -y
         
 ENTRYPOINT [ "/bin/bash", "-c", "./config.sh --unattended --replace && ./run.sh" ]
