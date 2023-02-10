@@ -8,6 +8,9 @@ WORKDIR /agent
 # Set PowerShell as default shell
 SHELL [ "pwsh", "-NoProfile", "-Command" ]
 
+# Avoid warnings by switching to noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Install VSTS/DevOps self-hosted Agent
 ARG agentversion=2.214.1
 ENV agentversion=${agentversion}
@@ -45,7 +48,7 @@ RUN apt-get update -yq ; `
 
 RUN	curl -L https://aka.ms/InstallAzureCLIDeb | bash
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -yq ; `
+RUN apt-get update -yq ; `
     apt-get -yq install curl gnupg ca-certificates ; `
     curl -L https://deb.nodesource.com/setup_14.x | bash ; `
     apt-get install -y npm ; `
