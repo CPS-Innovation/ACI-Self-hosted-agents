@@ -29,7 +29,7 @@ jobs:
       location: 'West Europe'
       templateLocation: 'Linked artifact'
       csmFile: './key-vault/key-vault-template.json'
-      csmParametersFile: './key-vault/key-vault-parameters.json'
+      csmParametersFile: './key-vault/key-vault-parameters-dev.json'
       overrideParameters: '-name $(KeyVaultName)'
       deploymentMode: 'Incremental'
 
