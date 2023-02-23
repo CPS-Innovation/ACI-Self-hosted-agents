@@ -7,9 +7,9 @@ pool:
 
 variables:
   ResourceGroup: 'rg-networking'
-  ServiceConnection: 'Innovation-Development: All-Information Management'
+  ServiceConnection: 'Innovation-QA: All-Information Management'
   KeyVaultName: 'kv-polaris-containers'
-  acrName: 'polariscontainersdev' # may contain alpha numeric characters only and must be between 5 and 50 characters
+  acrName: 'polariscontainersqa' # may contain alpha numeric characters only and must be between 5 and 50 characters
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
@@ -28,8 +28,8 @@ jobs:
       resourceGroupName: '$(ResourceGroup)'
       location: 'West Europe'
       templateLocation: 'Linked artifact'
-      csmFile: 'key-vault/key-vault-template.json'
-      csmParametersFile: 'key-vault/key-vault-parameters.json'
+      csmFile: './key-vault/key-vault-template.json'
+      csmParametersFile: './key-vault/key-vault-parameters.json'
       overrideParameters: '-name $(KeyVaultName)'
       deploymentMode: 'Incremental'
 
@@ -42,8 +42,8 @@ jobs:
       resourceGroupName: $(ResourceGroup)
       location: 'West Europe'
       templateLocation: 'Linked artifact'
-      csmFile: 'container-registry/container-registry-template.json'
-      csmParametersFile: 'container-registry/container-registry-parameters.json'
+      csmFile: './container-registry/container-registry-template.json'
+      csmParametersFile: './container-registry/container-registry-parameters.json'
       overrideParameters: '-acrName $(ACRName)'
       deploymentMode: 'Incremental'
 
@@ -53,5 +53,5 @@ jobs:
     inputs:
       azureSubscription: $(ServiceConnection)
       ScriptType: 'FilePath'
-      ScriptPath: 'powershell-scripts/ContainerRegistryKeyVaultPasswords.ps1'
+      ScriptPath: './powershell-scripts/ContainerRegistryKeyVaultPasswords.ps1'
       azurePowerShellVersion: 'LatestVersion'

@@ -13,8 +13,8 @@ pool:
 
 variables:
   ResourceGroupName: 'rg-networking'
-  ACIname: 'polarisbuildagent'
-  ServiceConnection: 'Innovation-Development: All-Information Management'
+  ACIname: 'polarisbuildagentqa'
+  ServiceConnection: 'Innovation-QA: All-Information Management'
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
@@ -25,6 +25,6 @@ steps:
   inputs:
     azureSubscription: $(ServiceConnection)
     ScriptType: 'FilePath'
-    ScriptPath: 'powershell-scripts/StopContainer.ps1'
+    ScriptPath: './powershell-scripts/StopContainer.ps1'
     ScriptArguments: '-ResourceGroupName $(ResourceGroupName) -ResourceName $(ACIname)'
     azurePowerShellVersion: 'LatestVersion'
