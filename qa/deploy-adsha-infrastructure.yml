@@ -8,7 +8,7 @@ pool:
 variables:
   ResourceGroup: 'rg-networking'
   ServiceConnection: 'Innovation-QA: All-Information Management'
-  KeyVaultName: 'kv-polaris-containers'
+  KeyVaultName: 'kv-polaris-containers-qa'
   acrName: 'polariscontainersqa' # may contain alpha numeric characters only and must be between 5 and 50 characters
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
