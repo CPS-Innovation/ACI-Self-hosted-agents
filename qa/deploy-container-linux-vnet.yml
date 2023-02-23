@@ -13,7 +13,7 @@ variables:
   # Name of Key Vault where secrets are stored for the Azure Container Registry credentials and its proper URL.
   ServiceConnection: 'Innovation-QA: All-Information Management'
   ResourceGroup: 'rg-networking'
-  keyVaultName: 'kv-polaris-containers'
+  keyVaultName: 'kv-polaris-containers-qa'
   # Name of the Azure Container Registry deployed in the previous pipeline.
   containerInstanceName: 'polarisbuildagentqa'
   acrName: 'polariscontainersqa'
