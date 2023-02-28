@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "containerInstanceName": {
+      "value": ""
+    },
+    "containerCount": {
+      "value": 1
+    },
+    "azdUrl": {
+      "value": ""
+    },
+    "patToken": {
+      "value": ""
+    },
+    "agentPool": {
+      "value": ""
+    },
+    "agentNamePrefix": {
+      "value": "aci-agent-linux-dotnet-qa-"
+    },
+    "registryLoginServer": {
+      "value": ""
+    },
+    "registryImageUri": {
+      "value": ""
+    },
+    "registryUserName": {
+      "value": ""
+    },
+    "registryPassword": {
+      "value": ""
+    },
+    "osType": {
+      "value": "Linux"
+    },
+    "vnetName": {
+      "value": "<VNET NAME>"
+    },
+    "subnetName": {
+      "value": "<SUBNET NAME>"
+    },
+    "networkProfileName": {
+      "value": "networkprofilename"
+    }
+  }
+}

@@ -66,7 +66,7 @@ steps:
     location: 'West Europe'
     templateLocation: 'Linked artifact'
     csmFile: './adsha-ubuntulinux-vnetintegration/ACI_DevOps_Agent_VNet_template.json'
-    csmParametersFile: './adsha-ubuntulinux-vnetintegration/ACI_DevOps_Agent_VNet_parameters.json'
+    csmParametersFile: './adsha-ubuntulinux-vnetintegration/ACI_DevOps_Agent_VNet_parameters_qa.json'
     overrideParameters: '-containerInstanceName $(containerInstanceName) -azdUrl $(azdUrl) -patToken $(patTokenManageAgent) -agentPool $(agentPool) -registryLoginServer $(registryUri) -registryImageUri $(registryUri)/$(containerRepository):$(imageTag) -registryUserName $(acrName) -registryPassword $(RegistryPassword1) -vnetName $(vnetName) -subnetName $(subnetName)'
     deploymentMode: 'Incremental'
 
