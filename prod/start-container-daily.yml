@@ -1,0 +1,30 @@
+trigger: none
+
+schedules:
+- cron: "0 7 * * Mon-Fri" # First number represent the amount of minutes, second represent the hours. In this case 07:00 Monday - Friday
+  displayName: Stop Self Hosted Agent Container
+  branches:
+    include: 
+    - master
+  always: true
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  ResourceGroupName: 'rg-networking'
+  ACIname: 'polarisbuildagentprod'
+  ServiceConnection: 'Innovation-Production: All-Information Management'
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+steps:
+- task: AzurePowerShell@4
+  inputs:
+    azureSubscription: $(ServiceConnection)
+    ScriptType: 'FilePath'
+    ScriptPath: './powershell-scripts/StartContainer.ps1'
+    ScriptArguments: '-ResourceGroupName $(ResourceGroupName) -ResourceName $(ACIname)'
+    azurePowerShellVersion: 'LatestVersion'

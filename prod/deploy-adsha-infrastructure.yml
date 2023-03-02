@@ -1,0 +1,57 @@
+trigger: none
+
+# We need to rely on a hosted agent from Microsoft.
+# And specifically a Windows agent because we'll be relying on passing on environment variables to Powershell.
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  ResourceGroup: 'rg-networking'
+  ServiceConnection: 'Innovation-Production: All-Information Management'
+  KeyVaultName: 'kv-polaris-containers-prod'
+  acrName: 'polariscontainersprod' # may contain alpha numeric characters only and must be between 5 and 50 characters
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+jobs:
+- job: DeployInfra
+  steps:
+
+# Deploy Azure Key Vault
+  - task: AzureResourceGroupDeployment@2
+    displayName: 'Azure Deployment: Key Vault'
+    inputs:
+      azureSubscription: $(ServiceConnection)
+      action: 'Create Or Update Resource Group'
+      resourceGroupName: '$(ResourceGroup)'
+      location: 'West Europe'
+      templateLocation: 'Linked artifact'
+      csmFile: './key-vault/key-vault-template.json'
+      csmParametersFile: './key-vault/key-vault-parameters-prod.json'
+      overrideParameters: '-name $(KeyVaultName)'
+      deploymentMode: 'Incremental'
+
+# Deploy Azure Container Registry
+  - task: AzureResourceGroupDeployment@2
+    displayName: 'Azure Deployment: Container Registry'
+    inputs:
+      azureSubscription: $(ServiceConnection)
+      action: 'Create Or Update Resource Group'
+      resourceGroupName: $(ResourceGroup)
+      location: 'West Europe'
+      templateLocation: 'Linked artifact'
+      csmFile: './container-registry/container-registry-template.json'
+      csmParametersFile: './container-registry/container-registry-parameters.json'
+      overrideParameters: '-acrName $(ACRName)'
+      deploymentMode: 'Incremental'
+
+# Store Azure Container Registry credentials in Azure Key Vault
+  - task: AzurePowerShell@4
+    displayName: 'Azure Deployment: Store registry credentials in Key Vault'
+    inputs:
+      azureSubscription: $(ServiceConnection)
+      ScriptType: 'FilePath'
+      ScriptPath: './powershell-scripts/ContainerRegistryKeyVaultPasswords.ps1'
+      azurePowerShellVersion: 'LatestVersion'
