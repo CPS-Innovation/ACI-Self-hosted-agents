@@ -2,7 +2,7 @@ trigger: none
 
 schedules:
 - cron: "0 6 * * Mon-Fri" # First number represent the amount of minutes, second represent the hours. In this case 07:00 Monday - Friday
-  displayName: Stop Self Hosted Agent Container
+  displayName: Start Self Hosted Agent Container
   branches:
     include: 
     - master
