@@ -11,7 +11,7 @@ variables:
   azdUrl: 'https://dev.azure.com/CPSDTS/'
   agentPool: 'ACI-Linux-Prod-VNet'
   # Name of Key Vault where secrets are stored for the Azure Container Registry credentials and its proper URL.
-  ServiceConnection: 'Innovation-Production: All-Information Management'
+  ServiceConnection: 'Innovation-Production: All-Information Management 2'
   ResourceGroup: 'rg-networking'
   keyVaultName: 'kv-containers-prod'
   # Name of the Azure Container Registry deployed in the previous pipeline.

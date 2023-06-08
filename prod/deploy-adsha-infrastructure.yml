@@ -7,7 +7,7 @@ pool:
 
 variables:
   ResourceGroup: 'rg-networking'
-  ServiceConnection: 'Innovation-Production: All-Information Management'
+  ServiceConnection: 'Innovation-Production: All-Information Management 2'
   KeyVaultName: 'kv-containers-prod'
   acrName: 'polariscontainersprod' # may contain alpha numeric characters only and must be between 5 and 50 characters
 

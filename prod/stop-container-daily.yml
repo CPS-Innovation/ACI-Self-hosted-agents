@@ -14,7 +14,7 @@ pool:
 variables:
   ResourceGroupName: 'rg-networking'
   ACIname: 'polarisbuildagentprod'
-  ServiceConnection: 'Innovation-Production: All-Information Management'
+  ServiceConnection: 'Innovation-Production: All-Information Management 2'
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=                                               DON't CHANGE ANYTHING BELOW THIS LINE!!                                                     =-=
